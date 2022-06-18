@@ -1,0 +1,18 @@
+1)SELECT * FROM main WHERE price IS NULL AND price = 0
+2)SELECT * FROM main WHERE price > 0 AND circulation IS NULL
+3)SELECT * FROM main WHERE d IS NULL
+4)SELECT * FROM main WHERE d >= "8/06/2021"
+5)SELECT * FROM main WHERE novelties is "Yes" AND ORDER BY price
+6)SELECT * FROM main WHERE pages BETWEEN (300,400) AND name
+7)SELECT * FROM main WHERE price BETWEEN (20,40) AND ORDER BY d DESC 
+8)SELECT * FROM main ORDER BY name AND ORDER BY price DESC
+9)SELECT * FROM main WHERE pages/price < 0.1
+12)SELECT name, d, date_format(date,'%d', date_format(date,'%m'), date_format(date,'%Y') FROM main;
+13)SELECT name, d, date_format(date,'%d/%m/%Y') FROM main;
+14)SELECT code, price, price*27, price*0.9, price*0.51 FROM main
+15)SELECT code,price FROM main
+16)INSERT INTO main (code,novelties,name,price,publisher,pages,format,d,circulation,subject,category)
+VALUES ("1654","Yes",)
+18)DELETE FROM main WHERE date < '1990-01-01';
+19)UPDATE lab SET d = '2022-04-06' WHERE date IS NULL
+20)UPDATE lab SET novelties = 'Yes' WHERE d >= '2005-01-01';

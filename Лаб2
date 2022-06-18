@@ -1,0 +1,27 @@
+1)SELECT id,code,novelties,name,price,pages FROM main;
+
+2)SELECT * FROM main;
+
+3)SELECT code,name,novelties,pages,price,id;
+
+4)SELECT * FROM main WHERE id<=10
+
+  SELECT * FROM main LIMIT 10
+
+6)SELECT DISTINCT code FROM main
+
+7)SELECT * FROM main WHERE novelties = "Yes"
+
+8)SELECT * FROM main WHERE price BETWEEN(20,30)
+
+9)SELECT * FROM main WHERE price < 20 and price > 30
+
+10)SELECT * FROM main WHERE pages BETWEEN(300,400) AND price BETWEEN(20,30)
+
+11)SELECT * FROM main ORDER BY d
+
+12)SELECT * FROM main WHERE id = 5110 OR id = 5141 OR id = 4985 OR id = 4241
+
+16)SELECT * FROM main WHERE name LIKE "АПП%" and name LIKE "%е"
+
+17)SELECT * FROM main WHERE name LIKE "%Microsoft%" and NOT "%Windows%"

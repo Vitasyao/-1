@@ -1,0 +1,18 @@
+1.SELECT COUNT(id), SUM(price), AVG(price), MIN(price),MAX(price) FROM main
+2.SELECT COUNT(id) FROM main WHERE price IS NOT NULL OR price > 0
+3.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), novelties FROM main GROUP BY novelties
+4.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), d FROM main GROUP BY d
+5.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), d FROM main WHERE price NOT BETWEEN 10 AND 20 GROUP BY d
+6.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), d FROM main GROUP BY d DESK
+7.SELECT COUNT(id), COUNT(DISTINCT id) FROM main
+8.SELECT COUNT(id), SUM(price),LEFT(name, 1) FROM main GROUP BY LEFT(name, 1)
+9.SELECT COUNT(id), SUM(price),LEFT(name, 1) FROM main WHERE name REGEXP '^[А-Я]' GROUP BY LEFT(name, 1)
+10.SELECT COUNT(id), SUM(price),LEFT(name, 1) FROM main WHERE name REGEXP '^[А-Я]' AND YEAR(date) >= 2000 GROUP BY LEFT(name, 1)
+11.SELECT COUNT(id), SUM(price),LEFT(name, 1) FROM main WHERE name REGEXP '^[А-Я]' AND YEAR(date) >= 2000 GROUP BY LEFT(name, 1) DESC
+12.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), FROM main GROUP BY MONTH(date)
+14.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), FROM main GROUP BY MONTH(date) ASC ORDER BY YEAR(date) DESC
+15.SELECT COUNT(id), SUM(price), SUM(price*27), SUM(price*0.9), SUM(price*0.51), novelties FROM main GROUP BY novelties
+16.SELECT COUNT(id), SUM(ROUND(price,-1)), SUM(ROUND(price*27,-1)), SUM(ROUND(price*0.9,-1)), SUM(ROUND(price*0.51,-1)), novelties FROM main GROUP BY novelties
+17.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), publisher FROM main GROUP BY publisher
+18.SELECT COUNT(id), SUM(price), AVG(price), MIN(price), MAX(price), subject, publisher FROM main GROUP BY publisher;
+20.SELECT publisher FROM main WHERE ROUND(price/pages, 1) > 0.1 GROUP BY publisher;

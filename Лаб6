@@ -1,0 +1,70 @@
+1.SELECT main.name, topic.topic_name,publishers.publisher_name FROM main,topic,publishers WHERE topic_id = name_id;
+2.SELECT main.name, topic.topic_name FROM main INNER JOIN topic ON topic_id = topic_id;
+3.SELECT main.name, main.price, publishers.publisher_name,
+bookformat.format_name FROM main,publishers,bookpormat
+4.SELECT main.name,topic.topic_name,categories.category_name,publishers.publisher_name FROM main
+	INNER JOIN publishers
+	INNER JOIN topic
+    	INNER JOIN categories
+    ON publisherID = publisher_id AND topic_id = topic_id AND category_id = category_id
+    GROUP BY topic.theme_name, categories.category_name;
+5.SELECT main.name FROM main
+	INNER JOIN publishers 
+	ON publisherID = publisher_id
+        WHERE publishers.publisher_name = 'Видавнича група BHV';
+6.SELECT SUM(main.pages), categories.category_name 
+  FROM main INNER JOIN categories 
+  ON main.category_id = categories.category_id
+  GROUP BY categories.category_name ORDER BY SUM(b.pages) DESC;
+7.SELECT AVG(main.price) FROM main 
+	INNER JOIN categories
+    	INNER JOIN topic
+ON main.category_id = categories.category_id AND main.topic_id = topic.topic_id
+WHERE categories.category_name = 'Linux' OR topic.topic_name = 'Використання ПК';
+8.SELECT * FROM main, topic, categories, publishers,bookformat WHERE
+main.topic_id = topic.topic_id AND main.format_id = bookformat.format_id 
+AND main.category_id = categories.category_id AND main.publisherID = publishers.publisher_id;
+9.SELECT * FROM main 
+    INNER JOIN publishers
+    INNER JOIN categories
+    INNER JOIN topic
+    INNER JOIN bookformat
+ON publisherID = publisher_id AND category_id = category_id 
+AND topic_id = topic_id
+AND format_id = format_id;
+10.SELECT * FROM main
+    LEFT JOIN publishers
+    ON publisherID = publisher_id
+    LEFT JOIN categories
+    ON category_id = category_id
+    LEFT JOIN topic
+    ON topic_id = topic_id
+    LEFT JOIN bookformat
+    ON format_id = form_id;
+11.
+12.
+13.SELECT main.name FROM main
+WHERE main.category_id =(SELECT categoies.categ_id FROM categories WHERE categories.category_name = 'C&C++');
+14.SELECT main.name FROM main
+   WHERE main.publisherID =(SELECT publishers.publisher_id FROM publishers
+   WHERE publishers.publisher_name = 'Видавнича група BHV' AND YEAR(main.date) >= 2000);
+15.SELECT publishers.publisher_name FROM publishers
+   WHERE publishers.publisher_id IN 
+   (SELECT main.publisherID FROM main
+   WHERE main.pages >= 400);
+16.SELECT categories.category_name FROM categories
+   WHERE categories.category_id IN 
+   (SELECT main.category_id FROM main
+   HAVING COUNT(main.name) > 3);
+17.SELECT main.name FROM main
+    WHERE EXISTS (SELECT * FROM publishers 
+    WHERE main.publisherID = publishers.publisher_id 
+    AND publishers.publisher_name = 'Видавнича група BHV');
+18. SELECT main.name FROM main
+    WHERE NOT EXISTS (SELECT * FROM publishers 
+    WHERE main.publisherID = publishers.publisher_id 
+    AND publishers.publisher_name = 'Видавнича група BHV');
+19.SELECT categories.category_name FROM categories
+		UNION
+SELECT topic.topic_name FROM topic;
+20.

@@ -1,0 +1,77 @@
+1.CREATE PROCEDURE P1()
+SELECT main.name, main.price, publishers.publisher_name, bookformat.format_name FROM main 
+	INNER JOIN publishers
+	INNER JOIN bookformat 
+   	ON publisherID = publisher_id AND format_id = format_id;
+CALL P1;
+2.CREATE PROCEDURE P2()
+SELECT main.name,topic.topic_name,categories.category_name,publishers.publisher_name FROM main
+	INNER JOIN topic
+	INNER JOIN categories
+	INNER JOIN publishers
+	ON topic_id = topic_id AND categoriy_id = category_id AND publisher_id = publisher_id;
+CALL P2;
+3.CREATE PROCEDURE P3()
+SELECT main.name FROM main
+	INNER JOIN publishers
+	ON publisher_id = publisher_id
+WHERE publishers.publisher_name = 'Видавнича група BHV';
+4.CREATE PROCEDURE P4()
+SELECT SUM(main.pages), categories.category_name FROM main
+	INNER JOIN categories
+	ON main.category_id = categories.category_id
+GROUP BY categories.category_name ORDER BY SUM(main.pages) DESC;
+5.DELIMITER //
+CREATE PROCEDURE P5(OUT category_price FLOAT(10), OUT topic_price FLOAT(10))
+BEGIN
+SET category_price = 
+(SELECT AVG(main.price) FROM main 
+	INNER JOIN categories ON main.category_id = categories.category_id 
+WHERE categories.category_name = 'Linux');
+SET topic_price = 
+(SELECT  AVG(main.price) FROM main 
+	INNER JOIN topic ON main.topic_id = topic.topic_id 
+WHERE topic.topic_name = 'Використання ПК в цілому');
+END//
+DELIMITER ;
+CALL P5(@categ_price, @topic_price);
+SELECT @categ_price, @topic_price;
+6.CREATE PROCEDURE P6()
+SELECT * FROM main, topic, categories, publishers, bookformat
+WHERE main.topic_id = topic.topic_id AND bookformat.format_id = bookformat.format_id
+AND main.category_id = categories.category_id AND main.publisher_id = publishers.publisher_id;
+CALL N6;
+7.CREATE PROCEDURE P7()
+SELECT b1.name, b1.pages FROM books as b1 
+    INNER JOIN books as b2
+    WHERE b1.pages = b2.pages AND b1.name != b2.name
+    ORDER BY b1.pages;
+CALL N7;
+10.CREATE PROCEDURE P10(IN page INT(10))
+SELECT main.pages, publishers.publisher_name FROM main
+	INNER JOIN publishers ON main.publisher_id = publishers.publisher_id 
+	WHERE main.pages > page;
+CALL N10(400);
+11.CREATE PROCEDURE P11()
+SELECT categories.category_name FROM categories
+	WHERE categories.category_id IN 
+		(SELECT main.category_id FROM main
+                          HAVING COUNT(main.name) > 3);
+CALL N11;
+12.CREATE PROCEDURE P12()
+SELECT main.name FROM main
+	WHERE EXISTS (SELECT * FROM publishers 
+                  WHERE main.publisherID = publishers.publisher_id 
+                  AND publishers.publisher_name = 'Видавнича група BHV');
+CALL N12();
+13.CREATE PROCEDURE P13()
+SELECT main.name FROM main
+	WHERE NOT EXISTS (SELECT * FROM publishers 
+                  WHERE main.publisher_id = publishers.publisher_id 
+                  AND publishers.publisher_name = 'Видавнича група BHV');
+CALL N13;
+14.CREATE PROCEDURE P14() 
+SELECT categories.category_name FROM categories GROUP by categories.category_name 
+UNION 
+SELECT topic.topic_name FROM topic GROUP by topic.topic_name;
+CALL N14;

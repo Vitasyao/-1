@@ -1,0 +1,80 @@
+CREATE TABLE bookformat(
+	format_id INT NOT NULL AUTO_INCREMENT,
+	format_name VARCHAR(15) NOT NULL,
+	PRIMARY KEY (format_id));
+CREATE TABLE topic(
+	topic_id INT NOT NULL AUTO_INCREMENT,
+	topic_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY (topic_id));
+CREATE TABLE categories(
+	category_id INT NOT NULL AUTO_INCREMENT,
+	category_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY (categories_id));
+CREATE TABLE publishers (
+	publisher_id int NOT NULL AUTO_INCREMENT,
+	publisher_name VARCHAR(30) NOT NULL,
+	PRIMARY KEY (publishers_id));
+
+SELECT format FROM main GROUP BY format;
+INSERT INTO bookformat (format_name) VALUES
+    ('60х84/16'),
+    ('60х88/16'),
+    ('60х90/16'),
+    ('70х100/16'),
+    ('84х108/16');
+
+SELECT category FROM main GROUP BY category;
+INSERT INTO categories (category_name) 
+	VALUES
+    ('Підручники'),
+    ('Захист і безпека ПК'),
+    ('Апаратні засоби ПК'),
+    ('Інші операційні системи'),
+    ('Інші книги'),
+    ('C&C++'),
+    ('Linux'),
+    ('SQL'),
+    ('Unix'),
+    ('Windows 2000');
+
+SELECT publisher FROM main GROUP BY publisher;
+INSERT INTO publishers (publisher_name) VALUES
+    ('DiaSoft'),
+    ('Вільямс'),
+    ('Вінниця: ВДТУ'),
+    ('Видавнича група BHV'),
+    ('ДМК'),
+    ('Києво-Могилянська академія'),
+    ('МикроАрт'),
+    ('Триумф'),
+    ('Університет "Україна"'),
+    ('Эком');
+
+SELECT subject FROM main GROUP BY subject;
+INSERT INTO topic (topic_name) VALUES
+    ('Використання ПК в цілому'),
+    ('Операційні системи'),
+    ('Програмування');
+
+UPDATE mainSET subject = 1 WHERE subject = 'Використання ПК в цілому';
+UPDATE main SET subject = 2 WHERE subject = 'Операційні системи';
+UPDATE main SET subject = 3 WHERE subject = 'Програмування';
+ALTER TABLE main CHANGE subject topic_id SMALLINT NOT NULL;UPDATE main SET publisher = 1 WHERE publisher = 'DiaSoft';
+
+UPDATE main SET publisher = 2 WHERE publisher = 'Вільямс';
+UPDATE main SET publisher = 3 WHERE publisher = 'Вінниця: ВДТУ';
+UPDATE main SET publisher = 4 WHERE publisher = 'Видавнича група BHV';
+UPDATE main SET publisher = 5 WHERE publisher = 'ДМК';
+UPDATE main SET publisher = 6 WHERE publisher = 'Києво-Могилянська академія';
+UPDATE main SET publisher = 7 WHERE publisher = 'МикроАрт';
+UPDATE main SET publisher = 8 WHERE publisher = 'Триумф';
+UPDATE main SET publisher = 9 WHERE publisher = 'Університет "Україна"';
+UPDATE main SET publisher = 10 WHERE publisher = 'Эком';
+ALTER TABLE main CHANGE publisher publisher_id SMALLINT NOT NULL;
+
+UPDATE main SET format = 1 WHERE format = '60х84/16';
+UPDATE main SET format = 2 WHERE format = '60х88/16';
+UPDATE main SET format = 3 WHERE format = '60х90/16';
+UPDATE main SET format = 4 WHERE format = '70х100/16';
+UPDATE main SET format = 5 WHERE format = '84х108/16';
+ALTER TABLE main CHANGE format format_id SMALLINT NOT NULL;
